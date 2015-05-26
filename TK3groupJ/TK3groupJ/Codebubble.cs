@@ -43,51 +43,63 @@ namespace TK3groupJ
         {
             if (increase)
             {
-                colors[pos] = System.Math.Min(colors[pos]+1, 5);
+                colors[pos] = (colors[pos] + 1) % 6;
             }
             else
             {
-                colors[pos] = System.Math.Max(colors[pos] - 1, 0);
+                colors[pos] = colors[pos] - 1;
+                if (colors[pos] < 0)
+                {
+                    colors[pos] = 5;
+                }
             }
             draw();
         }
 
+        public int[] getColors()
+        {
+            return colors;
+        }
+
         public void draw()
         {
-            if(highlighted == 0)
+            GT.Color highlightColor = GT.Color.White;
+            GT.Color notHighlightColor = GT.Color.Black;
+
+            if (highlighted == 0)
             {
-                dis.SimpleGraphics.DisplayEllipse(GT.Color.Red, 1, colorRange[colors[0]], x, y, 5, 5);
-                dis.SimpleGraphics.DisplayEllipse(GT.Color.White, 1, colorRange[colors[1]], x + 15, y, 5, 5);
-                dis.SimpleGraphics.DisplayEllipse(GT.Color.White, 1, colorRange[colors[2]], x + 30, y, 5, 5);
-                dis.SimpleGraphics.DisplayEllipse(GT.Color.White, 1, colorRange[colors[3]], x + 45, y, 5, 5);
+                dis.SimpleGraphics.DisplayEllipse(highlightColor, 1, colorRange[colors[0]], x, y, 5, 5);
+                dis.SimpleGraphics.DisplayEllipse(notHighlightColor, 1, colorRange[colors[1]], x + 15, y, 5, 5);
+                dis.SimpleGraphics.DisplayEllipse(notHighlightColor, 1, colorRange[colors[2]], x + 30, y, 5, 5);
+                dis.SimpleGraphics.DisplayEllipse(notHighlightColor, 1, colorRange[colors[3]], x + 45, y, 5, 5);
             }
-            else if(highlighted == 1)
+            else if (highlighted == 1)
             {
-                dis.SimpleGraphics.DisplayEllipse(GT.Color.White, 1, colorRange[colors[0]], x, y, 5, 5);
-                dis.SimpleGraphics.DisplayEllipse(GT.Color.Red, 1, colorRange[colors[1]], x + 15, y, 5, 5);
-                dis.SimpleGraphics.DisplayEllipse(GT.Color.White, 1, colorRange[colors[2]], x + 30, y, 5, 5);
-                dis.SimpleGraphics.DisplayEllipse(GT.Color.White, 1, colorRange[colors[3]], x + 45, y, 5, 5);
-            } 
-            else if(highlighted == 2)
+                dis.SimpleGraphics.DisplayEllipse(notHighlightColor, 1, colorRange[colors[0]], x, y, 5, 5);
+                dis.SimpleGraphics.DisplayEllipse(highlightColor, 1, colorRange[colors[1]], x + 15, y, 5, 5);
+                dis.SimpleGraphics.DisplayEllipse(notHighlightColor, 1, colorRange[colors[2]], x + 30, y, 5, 5);
+                dis.SimpleGraphics.DisplayEllipse(notHighlightColor, 1, colorRange[colors[3]], x + 45, y, 5, 5);
+            }
+            else if (highlighted == 2)
             {
-                dis.SimpleGraphics.DisplayEllipse(GT.Color.White, 1, colorRange[colors[0]], x, y, 5, 5);
-                dis.SimpleGraphics.DisplayEllipse(GT.Color.White, 1, colorRange[colors[1]], x + 15, y, 5, 5);
-                dis.SimpleGraphics.DisplayEllipse(GT.Color.Red, 1, colorRange[colors[2]], x + 30, y, 5, 5);
-                dis.SimpleGraphics.DisplayEllipse(GT.Color.White, 1, colorRange[colors[3]], x + 45, y, 5, 5);
+                dis.SimpleGraphics.DisplayEllipse(notHighlightColor, 1, colorRange[colors[0]], x, y, 5, 5);
+                dis.SimpleGraphics.DisplayEllipse(notHighlightColor, 1, colorRange[colors[1]], x + 15, y, 5, 5);
+                dis.SimpleGraphics.DisplayEllipse(highlightColor, 1, colorRange[colors[2]], x + 30, y, 5, 5);
+                dis.SimpleGraphics.DisplayEllipse(notHighlightColor, 1, colorRange[colors[3]], x + 45, y, 5, 5);
             }
             else if (highlighted == 3)
             {
-                dis.SimpleGraphics.DisplayEllipse(GT.Color.White, 1, colorRange[colors[0]], x, y, 5, 5);
-                dis.SimpleGraphics.DisplayEllipse(GT.Color.White, 1, colorRange[colors[1]], x + 15, y, 5, 5);
-                dis.SimpleGraphics.DisplayEllipse(GT.Color.White, 1, colorRange[colors[2]], x + 30, y, 5, 5);
-                dis.SimpleGraphics.DisplayEllipse(GT.Color.Red, 1, colorRange[colors[3]], x + 45, y, 5, 5);
+                dis.SimpleGraphics.DisplayEllipse(notHighlightColor, 1, colorRange[colors[0]], x, y, 5, 5);
+                dis.SimpleGraphics.DisplayEllipse(notHighlightColor, 1, colorRange[colors[1]], x + 15, y, 5, 5);
+                dis.SimpleGraphics.DisplayEllipse(notHighlightColor, 1, colorRange[colors[2]], x + 30, y, 5, 5);
+                dis.SimpleGraphics.DisplayEllipse(highlightColor, 1, colorRange[colors[3]], x + 45, y, 5, 5);
             }
             else
             {
-                dis.SimpleGraphics.DisplayEllipse(GT.Color.White, 1, colorRange[colors[0]], x, y, 5, 5);
-                dis.SimpleGraphics.DisplayEllipse(GT.Color.White, 1, colorRange[colors[1]], x + 15, y, 5, 5);
-                dis.SimpleGraphics.DisplayEllipse(GT.Color.White, 1, colorRange[colors[2]], x + 30, y, 5, 5);
-                dis.SimpleGraphics.DisplayEllipse(GT.Color.White, 1, colorRange[colors[3]], x + 45, y, 5, 5);
+                dis.SimpleGraphics.DisplayEllipse(notHighlightColor, 1, colorRange[colors[0]], x, y, 5, 5);
+                dis.SimpleGraphics.DisplayEllipse(notHighlightColor, 1, colorRange[colors[1]], x + 15, y, 5, 5);
+                dis.SimpleGraphics.DisplayEllipse(notHighlightColor, 1, colorRange[colors[2]], x + 30, y, 5, 5);
+                dis.SimpleGraphics.DisplayEllipse(notHighlightColor, 1, colorRange[colors[3]], x + 45, y, 5, 5);
             }
         }
     }

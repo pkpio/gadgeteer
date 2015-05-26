@@ -18,56 +18,43 @@ namespace TK3groupJ
     class CodegeneratorScreen
     {
         DisplayTE35 dis;
-        Joystick jstick;
         int highlight = 0;
         Codebubble bubble;
 
-        public CodegeneratorScreen(DisplayTE35 dis, Joystick jstick)
+        public CodegeneratorScreen(DisplayTE35 dis)
         {
             this.dis = dis;
-            this.jstick = jstick;
 
             dis.SimpleGraphics.DisplayText("Please generate a code", Resources.GetFont(Resources.FontResources.NinaB), GT.Color.White, 10, 10);
-            bubble = new Codebubble(20, 50, highlight, 0,0,0,0, dis);
+            bubble = new Codebubble(20, 50, highlight, 0, 0, 0, 0, dis);
             bubble.draw();
-
-            Thread JstickThread = new Thread(JstickLoop);
-            JstickThread.Start();
         }
 
-        void JstickLoop()
+        public int[] getCode()
         {
-            double posX;
-            double posY;
+            return bubble.getColors();
+        }
 
-            while (true)
-            {
-                posX = jstick.GetPosition().X;
-                posY = jstick.GetPosition().Y;
+        public void moveRight()
+        {
+            highlight = System.Math.Min(highlight + 1, 3);
+            bubble.changeHighlight(highlight);
+        }
 
-                if (posX > 0.5)
-                {
-                    highlight = System.Math.Min(highlight + 1, 3);
-                    bubble.changeHighlight(highlight);
+        public void moveLeft()
+        {
+            highlight = System.Math.Max(highlight - 1, 0);
+            bubble.changeHighlight(highlight);
+        }
 
-                }
-                else if (posX < -0.5)
-                {
-                    highlight = System.Math.Max(highlight - 1, 0);
-                    bubble.changeHighlight(highlight);
-                }
+        public void moveUp()
+        {
+            bubble.changeColor(highlight, false);
+        }
 
-                if (posY > 0.5)
-                {
-                    bubble.changeColor(highlight, false);
-                }
-                else if (posY < -0.5)
-                {
-                    bubble.changeColor(highlight, true);
-                }
-
-                Thread.Sleep(80);
-            }
+        public void moveDown()
+        {
+            bubble.changeColor(highlight, true);
         }
     }
 }

@@ -18,57 +18,34 @@ namespace TK3groupJ
     public class Startscreen
     {
         DisplayTE35 dis;
-        Joystick jstick;
-        Boolean twoPlayers = false;
 
-        public Startscreen(DisplayTE35 dis, Joystick jstick)
+        public Startscreen(DisplayTE35 dis)
         {
             this.dis = dis;
-            this.jstick = jstick;
             dis.SimpleGraphics.DisplayText("Select player mode", Resources.GetFont(Resources.FontResources.NinaB), GT.Color.White, 10, 10);
             dis.SimpleGraphics.DisplayRectangle(GT.Color.Red, 2, GT.Color.Gray, 10, 40, 300, 50);
             dis.SimpleGraphics.DisplayRectangle(GT.Color.White, 2, GT.Color.Gray, 10, 110, 300, 50);
             dis.SimpleGraphics.DisplayText("1 Player", Resources.GetFont(Resources.FontResources.NinaB), GT.Color.White, 20, 60);
             dis.SimpleGraphics.DisplayText("2 Players", Resources.GetFont(Resources.FontResources.NinaB), GT.Color.White, 20, 130);
 
-            jstick.JoystickReleased += jstick_JoystickReleased;
-
-            Thread JstickThread = new Thread(JstickLoop);
-            JstickThread.Start();
         }
 
-        void jstick_JoystickReleased(Joystick sender, Joystick.ButtonState state)
+        public void changeSelectedMode(Boolean twoPlayers)
         {
-            
-        }
-
-        void JstickLoop()
-        {
-            double posY;
-
-            while(true)
+            if (twoPlayers)
             {
-                posY = jstick.GetPosition().Y;
+                dis.SimpleGraphics.DisplayRectangle(GT.Color.White, 2, GT.Color.Gray, 10, 40, 300, 50);
+                dis.SimpleGraphics.DisplayRectangle(GT.Color.Red, 2, GT.Color.Gray, 10, 110, 300, 50);
+                dis.SimpleGraphics.DisplayText("1 Player", Resources.GetFont(Resources.FontResources.NinaB), GT.Color.White, 20, 60);
+                dis.SimpleGraphics.DisplayText("2 Players", Resources.GetFont(Resources.FontResources.NinaB), GT.Color.White, 20, 130);
+            }
+            else
+            {
+                dis.SimpleGraphics.DisplayRectangle(GT.Color.Red, 2, GT.Color.Gray, 10, 40, 300, 50);
+                dis.SimpleGraphics.DisplayRectangle(GT.Color.White, 2, GT.Color.Gray, 10, 110, 300, 50);
+                dis.SimpleGraphics.DisplayText("1 Player", Resources.GetFont(Resources.FontResources.NinaB), GT.Color.White, 20, 60);
+                dis.SimpleGraphics.DisplayText("2 Players", Resources.GetFont(Resources.FontResources.NinaB), GT.Color.White, 20, 130);
 
-                if(twoPlayers && posY > 0.5)
-                {
-                    twoPlayers = !twoPlayers;
-                    dis.SimpleGraphics.DisplayRectangle(GT.Color.Red, 2, GT.Color.Gray, 10, 40, 300, 50);
-                    dis.SimpleGraphics.DisplayRectangle(GT.Color.White, 2, GT.Color.Gray, 10, 110, 300, 50);
-                    dis.SimpleGraphics.DisplayText("1 Player", Resources.GetFont(Resources.FontResources.NinaB), GT.Color.White, 20, 60);
-                    dis.SimpleGraphics.DisplayText("2 Players", Resources.GetFont(Resources.FontResources.NinaB), GT.Color.White, 20, 130);
-
-                } 
-                else if(!twoPlayers && posY < -0.5)
-                {
-                    twoPlayers = !twoPlayers;
-                    dis.SimpleGraphics.DisplayRectangle(GT.Color.White, 2, GT.Color.Gray, 10, 40, 300, 50);
-                    dis.SimpleGraphics.DisplayRectangle(GT.Color.Red, 2, GT.Color.Gray, 10, 110, 300, 50);
-                    dis.SimpleGraphics.DisplayText("1 Player", Resources.GetFont(Resources.FontResources.NinaB), GT.Color.White, 20, 60);
-                    dis.SimpleGraphics.DisplayText("2 Players", Resources.GetFont(Resources.FontResources.NinaB), GT.Color.White, 20, 130);
-                }
-
-                Thread.Sleep(80);
             }
         }
     }
