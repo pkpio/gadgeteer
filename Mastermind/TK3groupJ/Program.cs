@@ -46,15 +46,14 @@ namespace Mastermind
             /*Codebubble c = new Codebubble(10, 30, GT.Color.Green, GT.Color.Magenta, GT.Color.Red, GT.Color.Blue, displayTE35);
             c.draw();*/
 
-            // startscreen = new Startscreen(displayTE35);
-            // currentThread = new Thread(startscreenLoop);
-            // currentThread.Start();
+            startscreen = new Startscreen(displayTE35);
+            currentThread = new Thread(startscreenLoop);
+            currentThread.Start();
             //ModusScreen getModus = new ModusScreen(displayTE35, joystick);
             // CodegeneratorScreen genScreen = new CodegeneratorScreen(displayTE35, joystick);
             JoystickHandler jh = new JoystickHandler(joystick);
             jh.Start();
             jh.SetCallback(test);
-
         }
 
         void test(int jsEvent)

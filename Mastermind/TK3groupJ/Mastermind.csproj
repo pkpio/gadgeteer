@@ -56,6 +56,9 @@
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
     <Compile Include="Startscreen.cs" />
+    <Compile Include="Widgets\EllipseView.cs" />
+    <Compile Include="Widgets\RectangleView.cs" />
+    <Compile Include="Widgets\TextView.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="Gadgeteer" />
@@ -100,7 +103,5 @@
     <None Include="Resources\NinaB.tinyfnt" />
     <None Include="Resources\small.tinyfnt" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Models\" />
-  </ItemGroup>
+  <ItemGroup />
 </Project>

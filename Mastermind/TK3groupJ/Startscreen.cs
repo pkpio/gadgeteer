@@ -13,6 +13,8 @@ using GT = Gadgeteer;
 using GTM = Gadgeteer.Modules;
 using Gadgeteer.Modules.GHIElectronics;
 
+using Mastermind.Widgets;
+
 namespace Mastermind
 {
     public class Startscreen
@@ -22,7 +24,9 @@ namespace Mastermind
         public Startscreen(DisplayTE35 dis)
         {
             this.dis = dis;
-            dis.SimpleGraphics.DisplayText("Select player mode", Resources.GetFont(Resources.FontResources.NinaB), GT.Color.White, 10, 10);
+            //dis.SimpleGraphics.DisplayText("Select player mode", Resources.GetFont(Resources.FontResources.NinaB), GT.Color.White, 10, 10);
+            TextView titleView = new TextView(dis, "Select player mode", 10, 10);
+            titleView.Draw();
             dis.SimpleGraphics.DisplayRectangle(GT.Color.Red, 2, GT.Color.Gray, 10, 40, 300, 50);
             dis.SimpleGraphics.DisplayRectangle(GT.Color.White, 2, GT.Color.Gray, 10, 110, 300, 50);
             dis.SimpleGraphics.DisplayText("1 Player", Resources.GetFont(Resources.FontResources.NinaB), GT.Color.White, 20, 60);
