@@ -3,7 +3,7 @@ using System.Threading;
 using Microsoft.SPOT;
 using Gadgeteer.Modules.GHIElectronics;
 
-namespace Mastermind
+namespace Mastermind.Modules
 {
     class JoystickHandler
     {
@@ -14,13 +14,15 @@ namespace Mastermind
         public const int JS_MOVE_RIGHT = 2;
         public const int JS_MOVE_UP = 3;
         public const int JS_MOVE_DOWN = 4;
+        public const int JS_RELEASE = 5;
+
         private const int SENSITIVITY = 200; // Lower values imply high sensitivity
 
         /**
          * Joystick event handler delegate / type
          */
-        public delegate void JsEventHandler(int jsEvent);
-        event JsEventHandler jsEventCallback;
+        public delegate void JsEventCallback(int jsEvent);
+        event JsEventCallback eventCallback;
 
         Joystick mJoystick;
         Thread mJsThread;
@@ -33,9 +35,9 @@ namespace Mastermind
         /**
          * This callback will be called when ever a joystick event occurs
          */
-        public void SetCallback(JsEventHandler jsEventHandle)
+        public void SetCallback(JsEventCallback jsEventHandle)
         {
-            this.jsEventCallback = jsEventHandle;
+            this.eventCallback = jsEventHandle;
         }
 
         /**
@@ -48,27 +50,36 @@ namespace Mastermind
                 double posX = mJoystick.GetPosition().X;
                 double posY = mJoystick.GetPosition().Y;
 
-                if (jsEventCallback != null)
-                {
-                    // X events
-                    if (posX < -0.5)
-                        jsEventCallback(JS_MOVE_LEFT);
-                    else if (posX > 0.5)
-                        jsEventCallback(JS_MOVE_RIGHT);
+                // X events
+                if (posX < -0.5)
+                    SendEventToCallback(JS_MOVE_LEFT);
+                else if (posX > 0.5)
+                    SendEventToCallback(JS_MOVE_RIGHT);
 
-                    // Y events
-                    if (posY < -0.5)
-                        jsEventCallback(JS_MOVE_DOWN);
-                    else if (posY > 0.5)
-                        jsEventCallback(JS_MOVE_UP);
-                }
+                // Y events
+                if (posY < -0.5)
+                    SendEventToCallback(JS_MOVE_DOWN);
+                else if (posY > 0.5)
+                    SendEventToCallback(JS_MOVE_UP);
 
                 Thread.Sleep(SENSITIVITY);
             }
         }
 
+        void JsRelease(Joystick sender, Joystick.ButtonState state)
+        {
+            SendEventToCallback(JS_RELEASE);
+        }
+
+        private void SendEventToCallback(int action)
+        {
+            if(eventCallback != null)
+                eventCallback(action);
+        }
+
         public void Start()
         {
+            mJoystick.JoystickReleased += JsRelease;
             mJsThread = new Thread(StartJoystick);
             mJsThread.Start();
         }
