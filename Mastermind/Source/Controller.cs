@@ -20,6 +20,8 @@ namespace Mastermind
         private ButtonHandler mButtonHandler;
         private DisplayTE35 mDisplay;
 
+        public int[] GameCode = new int[4]; // Solution to the game
+
         public Controller(JoystickHandler jsHandler, ButtonHandler btnHandler, DisplayTE35 display)
         {
             this.mJoystickHandler = jsHandler;
@@ -45,7 +47,7 @@ namespace Mastermind
 
             // Reset callbacks
             mJoystickHandler.SetCallback(null);
-            //mButtonHandler.SetCallback(null);
+            mButtonHandler.SetCallback(null);
 
             // Change screen
             switch (screenChoice)
@@ -73,9 +75,9 @@ namespace Mastermind
         /**
          * Set a callback for Button events
          */
-        public void SetButtonCallback()
+        public void SetButtonCallback(ButtonHandler.BtnEventCallback callback)
         {
-            // -TODO- Implement button callback and add here
+            mButtonHandler.SetCallback(callback);
         }
     }
 }
