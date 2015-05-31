@@ -92,8 +92,10 @@ namespace Mastermind.Screens
 
                 case JoystickHandler.JS_RELEASE:
                     if (modeChoice == MODE_ONEPLAY)
-                        // -TODO- Generate a random code
+                    {
+                        GenerateCodeForPlayer();
                         mController.ChangeScreen(Controller.SCREEN_GAME_PLAY);
+                    }
                     else if (modeChoice == MODE_TWOPLAY)
                         mController.ChangeScreen(Controller.SCREEN_CODE_PICKER);
                     break;
@@ -116,6 +118,17 @@ namespace Mastermind.Screens
             // Redraw text
             onePlayText.Draw();
             twoPlayText.Draw();
+        }
+
+        void GenerateCodeForPlayer()
+        {
+            Random rnd = new Random();
+            int[] code = new int[4];
+            for (int i = 0; i < 4; i++)
+                code[i] = rnd.Next(6);
+
+            // Set this as game code
+            mController.GameCode = code;
         }
     }
 }

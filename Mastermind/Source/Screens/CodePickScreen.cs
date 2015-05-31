@@ -10,7 +10,9 @@ using Gadgeteer.Modules.GHIElectronics;
 
 namespace Mastermind.Screens
 {
-    // -TODO- Implement. In 2 player mode, this will be the screen where user picks a code
+    /**
+     * In 2 player mode, this will be the screen where user picks a code
+     */
     class CodePickScreen
     {
         // Widget positions
