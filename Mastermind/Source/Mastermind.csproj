@@ -58,6 +58,7 @@
     <Compile Include="Screens\CodePickScreen.cs" />
     <Compile Include="Screens\GameScreen.cs" />
     <Compile Include="Screens\StartScreen.cs" />
+    <Compile Include="Widgets\CodeView.cs" />
     <Compile Include="Widgets\EllipseView.cs" />
     <Compile Include="Widgets\RectangleView.cs" />
     <Compile Include="Widgets\TextView.cs" />

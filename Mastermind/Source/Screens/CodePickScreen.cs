@@ -14,6 +14,7 @@ namespace Mastermind.Screens
     class CodePickScreen
     {
         Controller mController;
+        CodeView code;
 
         public CodePickScreen(Controller mController)
         {
@@ -22,23 +23,51 @@ namespace Mastermind.Screens
 
         public void Init()
         {
-            RectangleView sampleRect = new RectangleView(0, 0,
-                mController.GetDisplay().SimpleGraphics.Width,
-                mController.GetDisplay().SimpleGraphics.Height, 
-                GT.Color.Orange, mController.GetDisplay());
-
-            TextView sampleText = new TextView(
+            /* RectangleView sampleRect = new RectangleView(0, 0,
+                 mController.GetDisplay().SimpleGraphics.Width,
+                 mController.GetDisplay().SimpleGraphics.Height, 
+                 GT.Color.Orange, mController.GetDisplay());
+             */
+            TextView Text = new TextView(
                 mController.GetDisplay(),
-                "Code Picker",
-                mController.GetDisplay().SimpleGraphics.Width/2 - 50,
-                mController.GetDisplay().SimpleGraphics.Height/2 - 10);
+                "Please Generate a Code",
+                10,
+                10);
+             code = new CodeView(20, 50, mController.GetDisplay());
+            
 
             mController.SetJoystickCallback(JoystickEvent);
         }
 
         void JoystickEvent(int action)
         {
-            mController.ChangeScreen(Controller.SCREEN_START);
+            
+            switch (action)
+            {
+                case JoystickHandler.JS_MOVE_DOWN:
+                    code.DecreaseValue();
+                    break;
+
+                case JoystickHandler.JS_MOVE_UP:
+                    code.IncreaseValue();
+                    break;
+
+                case JoystickHandler.JS_MOVE_LEFT:
+                    code.MoveSelectionLeft();
+                    break;
+
+                case JoystickHandler.JS_MOVE_RIGHT:
+                    code.MoveSelectionRight();
+                    break;
+
+              /*  case JoystickHandler.JS_RELEASE:
+                    if (modeChoice == MODE_ONEPLAY)
+                        // -TODO- Generate a random code
+                        mController.ChangeScreen(Controller.SCREEN_GAME_PLAY);
+                    else if (modeChoice == MODE_TWOPLAY)
+                        mController.ChangeScreen(Controller.SCREEN_CODE_PICKER);
+                    break;*/
+            }
         }
     }
 }
