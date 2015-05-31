@@ -8,6 +8,9 @@ using Microsoft.SPOT.Presentation.Media;
 using Microsoft.SPOT.Presentation.Shapes;
 using Microsoft.SPOT.Touch;
 
+using Mastermind.Modules;
+using Mastermind.Widgets;
+
 using Gadgeteer.Networking;
 using GT = Gadgeteer;
 using GTM = Gadgeteer.Modules;
@@ -153,6 +156,58 @@ namespace Mastermind
             return code;
         }
 
+        public class Controller
+        {
+            public const int SCREEN_START = 0;
+            public const int SCREEN_CODE_PICKER = 1;
+            public const int SCREEN_GAME_PLAY = 2;
+
+            private JoystickHandler mJoystickHandler;
+            private DisplayTE35 mDisplay;
+
+            public Controller(JoystickHandler jsHandle, DisplayTE35 display)
+            {
+                this.mJoystickHandler = jsHandle;
+                this.mDisplay = display;
+            }
+
+            /**
+             * Returns a handle to display module
+             */
+            public DisplayTE35 GetDisplay()
+            {
+                return this.mDisplay;
+            }
+            
+            /**
+             * Set a callback for joystick events
+             */
+            public void SetJoystickCallback(JoystickHandler.JsEventCallback callback){
+                mJoystickHandler.SetCallback(callback);
+            }
+
+            /**
+             * Set a callback for Button events
+             */
+            public void SetButtonCallback()
+            {
+
+            }
+
+            /**
+             * Transfer control to a different screen
+             */
+            public void ChangeScreen(int screenChoice)
+            {
+                /**
+                 * -TODO- 
+                 * - Erase display
+                 * - Reset all callbacks 
+                 * - Instantiate the screen
+                 * - Call Initialize method in it
+                 */
+            }
+        }
 
     }
 }

@@ -42,7 +42,7 @@
   <ItemGroup>
     <Compile Include="Codebubble.cs" />
     <Compile Include="CodegeneratorScreen.cs" />
-    <Compile Include="JoystickHandler.cs" />
+    <Compile Include="Modules\JoystickHandler.cs" />
     <Compile Include="Program.generated.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
