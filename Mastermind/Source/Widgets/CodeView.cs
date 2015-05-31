@@ -51,47 +51,38 @@ namespace Mastermind.Widgets
         public  void MoveSelectionLeft()
         {
             bubble[selected].SetOutlineColor(outlineUnselectColor);
-            if (selected == 0){
-                selected = 3;
-            }
-            else selected --;
+            selected = (selected == 0) ? 3 : selected - 1;
             bubble[selected].SetOutlineColor(outlineSelectColor);
         }
+
         public void MoveSelectionRight()
         {
             bubble[selected].SetOutlineColor(outlineUnselectColor);
-            if (selected == 3)
-            {
-                selected = 0;
-            }
-            else selected++;
+            selected = (selected == 3) ? 0 : selected + 1;
             bubble[selected].SetOutlineColor(outlineSelectColor);
         }
+
+        /**
+         * Enable or disable the showing of a selector on one of the bubbles
+         */
+        public void ShowSelector(Boolean state)
+        {
+            if(state)
+                bubble[selected].SetOutlineColor(outlineSelectColor);
+            else
+                bubble[selected].SetOutlineColor(outlineUnselectColor);
+        }
+
         public void IncreaseValue()
         {
-            if (values[selected] == 5)
-            {
-                values[selected] = 0;
-            }
-            else values[selected] = values[selected] + 1;
-
+            values[selected] = (values[selected] >= 5) ? 0 : values[selected] + 1;
             bubble[selected].SetFillColor(MapValueToColor(values[selected]));
-
         }
+
         public void DecreaseValue()
         {
-            if (values[selected] == 0)
-            {
-                values[selected] = 5;
-            }
-            else values[selected] = values[selected] - 1;
-
+            values[selected] = (values[selected] <= 0) ? 5 : values[selected] - 1;
             bubble[selected].SetFillColor(MapValueToColor(values[selected]));
-
-        }
-        public void NoSelect()
-        {
-
         }
 
         private GT.Color MapValueToColor(int value)
@@ -113,5 +104,30 @@ namespace Mastermind.Widgets
             }
             return GT.Color.Blue;
         }
+
+        /**
+         * Get the current bubble pattern values
+         */
+        public int[] GetValues()
+        {
+            return this.values;
+        }
+
+        /**
+         * Updates the current bubble values and refresh the colors accordingly
+         */
+        public void SetValues(int[] newValues)
+        {
+            // Checks for values size
+            if (newValues == null || newValues.Length != 4)
+                throw new ArgumentException("Argument to SetValues MUST be an array of size 4");
+
+            // -TODO- Value Max. and Min. checks
+
+            this.values = newValues;
+            for (int i = 0; i < values.Length; i++)
+                bubble[i].SetFillColor(MapValueToColor(values[i]));
+        }
+
     }
 }
