@@ -32,7 +32,8 @@ namespace Mastermind
             jsHandler.Start();
 
             // Init Button
-            ButtonHandler btnHandler = new ButtonHandler();
+            ButtonHandler btnHandler = new ButtonHandler(button);
+            btnHandler.Start();
             
             // Setup a controller
             Controller mController = new Controller(jsHandler, btnHandler, displayTE35);
