@@ -10,19 +10,20 @@ namespace Mastermind.Widgets
     class RectangleView
     {
         // Widget params
-        public int width = 0;
-        public int height = 0;
-        public int posX = 0;
-        public int posY = 0;
-        public Gadgeteer.Color fillColor = Gadgeteer.Color.Black;
-        public Gadgeteer.Color outlineColor = Gadgeteer.Color.Black;
-        public int outlineThickness = 0;
-        
-        DisplayTE35 mDisplay;
+        private int width = 0;
+        private int height = 0;
+        private int posX = 0;
+        private int posY = 0;
+        private Gadgeteer.Color fillColor = Gadgeteer.Color.Black;
+        private Gadgeteer.Color outlineColor = Gadgeteer.Color.Black;
+        private int outlineThickness = 0;
+
+        private DisplayTE35 mDisplay;
 
         public RectangleView(DisplayTE35 mDisplay)
         {
             this.mDisplay = mDisplay;
+            Draw();
         }
 
         public RectangleView(int posX, int posY, int width, int height,
@@ -34,6 +35,7 @@ namespace Mastermind.Widgets
             this.height = height;
             this.fillColor = fillColor;
             this.mDisplay = display;
+            Draw();
         }
 
         public RectangleView(int posX, int posY, int width, int height, 
@@ -48,6 +50,13 @@ namespace Mastermind.Widgets
             this.outlineColor = outlineColor;
             this.outlineThickness = outlineThickness;
             this.mDisplay = display;
+            Draw();
+        }
+
+        public void SetFillColor(Gadgeteer.Color color)
+        {
+            this.fillColor = color;
+            Draw();
         }
 
         public void Draw()

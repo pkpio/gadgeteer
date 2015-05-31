@@ -10,15 +10,15 @@ namespace Mastermind.Widgets
     class EllipseView
     {
         // Widget params
-        public int posX = 0;
-        public int posY = 0;
-        public int radiusX = 0;
-        public int radiusY = 0;
-        public Gadgeteer.Color fillColor = Gadgeteer.Color.Black;
-        public Gadgeteer.Color outlineColor = Gadgeteer.Color.Black;
-        public int outlineThickness = 0;
-        
-        DisplayTE35 mDisplay;
+        private int posX = 0;
+        private int posY = 0;
+        private int radiusX = 0;
+        private int radiusY = 0;
+        private Gadgeteer.Color fillColor = Gadgeteer.Color.Black;
+        private Gadgeteer.Color outlineColor = Gadgeteer.Color.Black;
+        private int outlineThickness = 0;
+
+        private DisplayTE35 mDisplay;
         
         public EllipseView(DisplayTE35 display){
             this.mDisplay = display;    

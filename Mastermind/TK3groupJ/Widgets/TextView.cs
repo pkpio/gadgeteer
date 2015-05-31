@@ -9,17 +9,18 @@ namespace Mastermind.Widgets
 {
     class TextView
     {
-        public String text;
-        public int posX = 0;
-        public int posY = 0;
-        public Gadgeteer.Color textColor = Gadgeteer.Color.White;
-        public Font textFont = Resources.GetFont(Resources.FontResources.NinaB);
+        private String text;
+        private int posX = 0;
+        private int posY = 0;
+        private Gadgeteer.Color textColor = Gadgeteer.Color.White;
+        private Font textFont = Resources.GetFont(Resources.FontResources.NinaB);
 
-        DisplayTE35 mDisplay;
+        private DisplayTE35 mDisplay;
 
         public TextView(DisplayTE35 display)
         {
-            this.mDisplay = display;   
+            this.mDisplay = display;
+            Draw();
         }
 
         public TextView(DisplayTE35 display, String text, int posX, int posY)
@@ -28,6 +29,7 @@ namespace Mastermind.Widgets
             this.text = text;
             this.posX = posX;
             this.posY = posY;
+            Draw();
         }
 
         public TextView(DisplayTE35 display, String text, int posX, int posY,
@@ -39,6 +41,7 @@ namespace Mastermind.Widgets
             this.posY = posY;
             this.textColor = textColor;
             this.textFont = textFont;
+            Draw();
         }
 
         public void Draw()
