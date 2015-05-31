@@ -21,7 +21,8 @@ namespace Mastermind.Widgets
         private DisplayTE35 mDisplay;
         
         public EllipseView(DisplayTE35 display){
-            this.mDisplay = display;    
+            this.mDisplay = display;
+            Draw();
         }
         
         public EllipseView(int posX, int posY,  int radiusX, int radiusY,
@@ -33,6 +34,7 @@ namespace Mastermind.Widgets
             this.radiusY = radiusY;
             this.fillColor = fillColor;
             this.mDisplay = display;
+            Draw();
         }
 
         public EllipseView(int posX, int posY, int radiusX, int radiusY, 
@@ -47,6 +49,19 @@ namespace Mastermind.Widgets
             this.outlineColor = outlineColor;
             this.outlineThickness = outlineThickness;
             this.mDisplay = display;
+            Draw();
+        }
+
+        public void SetFillColor(Gadgeteer.Color color)
+        {
+            this.fillColor = color;
+            Draw();
+        }
+
+        public void SetOutlineColor(Gadgeteer.Color color)
+        {
+            this.outlineColor = color;
+            Draw();
         }
 
         public void Draw()
