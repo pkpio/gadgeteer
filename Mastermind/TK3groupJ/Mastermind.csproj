@@ -40,8 +40,8 @@
   <!-- Everything below here is custom to .NET MF / Gadgeteer template-->
   <Import Project="$(NetMfTargetsBaseDir)$(TargetFrameworkVersion)\CSharp.Targets" />
   <ItemGroup>
-    <Compile Include="Codebubble.cs" />
-    <Compile Include="CodegeneratorScreen.cs" />
+    <Compile Include="Controller.cs" />
+    <Compile Include="Modules\ButtonHandler.cs" />
     <Compile Include="Modules\JoystickHandler.cs" />
     <Compile Include="Program.generated.cs">
       <AutoGen>True</AutoGen>
@@ -55,7 +55,9 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
-    <Compile Include="Startscreen.cs" />
+    <Compile Include="Screens\CodePickScreen.cs" />
+    <Compile Include="Screens\GameScreen.cs" />
+    <Compile Include="Screens\StartScreen.cs" />
     <Compile Include="Widgets\EllipseView.cs" />
     <Compile Include="Widgets\RectangleView.cs" />
     <Compile Include="Widgets\TextView.cs" />
