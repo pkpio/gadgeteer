@@ -54,9 +54,10 @@ namespace Mastermind
                     new StartScreen(this).Init();
                     break;
                 case SCREEN_CODE_PICKER:
-                    new CodePickScreen();
+                    new CodePickScreen(this).Init();
                     break;
                 case SCREEN_GAME_PLAY:
+                    new GameScreen(this).Init();
                     break;
             }
         }
