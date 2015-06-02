@@ -22,7 +22,7 @@ namespace Mastermind.Screens
         private const int codeViewPosY = 50;
 
         // Widget values
-        private const String titleString = "Please Generate a Code";
+        private const String titleString = "Please generate a code";
 
         Controller mController;
         CodeView mCodeView;
@@ -36,7 +36,10 @@ namespace Mastermind.Screens
         {
             TextView Text = new TextView(mController.GetDisplay(), titleString, titlePosX, titlePosY);
             mCodeView = new CodeView(codeViewPosX, codeViewPosY, mController.GetDisplay());
+            // Init joystick
             mController.SetJoystickCallback(JoystickEvent);
+            // Init button
+            mController.SetButtonCallback(ButtonEvent);
         }
 
         void JoystickEvent(int action)
@@ -59,11 +62,15 @@ namespace Mastermind.Screens
                 case JoystickHandler.JS_MOVE_RIGHT:
                     mCodeView.MoveSelectionRight();
                     break;
+            }
+        }
 
-                case JoystickHandler.JS_RELEASE:
-                    mController.GameCode = this.mCodeView.GetValues();
-                    mController.ChangeScreen(Controller.SCREEN_GAME_PLAY);
-                    break;
+        void ButtonEvent(int action)
+        {
+            if(action == ButtonHandler.BTN_RELEASE)
+            {
+                mController.GameCode = this.mCodeView.GetValues();
+                mController.ChangeScreen(Controller.SCREEN_GAME_PLAY);
             }
         }
     }

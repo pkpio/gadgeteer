@@ -16,7 +16,7 @@ namespace Mastermind.Modules
         public const int JS_MOVE_DOWN = 4;
         public const int JS_RELEASE = 5;
 
-        private const int SENSITIVITY = 200; // Lower values imply high sensitivity
+        private const int SENSITIVITY = 150; // Lower values imply higher sensitivity
 
         /**
          * Joystick event handler delegate / type

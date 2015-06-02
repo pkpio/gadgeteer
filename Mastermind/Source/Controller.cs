@@ -38,6 +38,14 @@ namespace Mastermind
         }
 
         /**
+         * Returns the solution code
+         */
+        public int[] GetCode()
+        {
+            return this.GameCode;
+        }
+
+        /**
          * Transfer control to a different screen
          */
         public void ChangeScreen(int screenChoice)

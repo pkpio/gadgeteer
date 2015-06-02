@@ -11,7 +11,7 @@ namespace Mastermind.Widgets
     {
         private static GT.Color COLOR_0 = GT.Color.Blue;
         private static GT.Color COLOR_1 = GT.Color.Magenta;
-        private static GT.Color COLOR_2 = GT.Color.Green;
+        private static GT.Color COLOR_2 = GT.Color.FromRGB(0, 204, 0); //green
         private static GT.Color COLOR_3 = GT.Color.Red;
         private static GT.Color COLOR_4 = GT.Color.Yellow;
         private static GT.Color COLOR_5 = GT.Color.Gray;
@@ -103,6 +103,51 @@ namespace Mastermind.Widgets
                     return COLOR_5;
             }
             return GT.Color.Blue;
+        }
+
+        /**
+         * Compares the values of this CodeView to an array 
+         * Returns a pair with 1. how many colors are at the correct spot and 
+         * 2. how many colors are correct but at the wrong spot
+         */
+        public int[] CompareGuess(int[] solution)
+        {
+            //first entry: number of bubbles with correct color and spot, 
+            //second entry: number of bubbles with correct color but wrong spot
+            int[] returnVal = new int[]{0,0};
+            int[] guess = this.GetValues();
+            //is changed to true if bubble has correct color and spot, don't look at in second for-loop
+            Boolean[] matched = new Boolean[4]{false, false, false, false};
+            //is changed to true if bubble correct color but wrong spot, can only be used once, than done
+            Boolean[] done = new Boolean[4] { false, false, false, false };
+            int size = guess.Length;
+
+            //get number of bubbles with correct color and spot
+            for (int i = 0; i < size; i++)
+            {
+                if (guess[i] == solution[i])
+                {
+                    matched[i] = true;
+                    returnVal[0]++;
+                }
+            }
+            //get number of bubbles with correct color but wrong spot. Bubbles that are done, cannot be used
+            for (int j = 0; j < size; j++)
+            {
+                if (!matched[j])
+                {
+                    for (int k = 0; k < size; k++)
+                    {
+                        if (j!=k && guess[j]==solution[k] && !done[k] && !matched[k])
+                        {
+                            done[k] = true;
+                            returnVal[1]++;
+                        }
+                    }
+                }
+                Debug.Print("m " + matched[0] + matched[1] + matched[2] + matched[3] + " d " + done[0] + done[1] + done[2] + done[3]);
+            }
+            return returnVal;
         }
 
         /**

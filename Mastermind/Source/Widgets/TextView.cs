@@ -44,6 +44,18 @@ namespace Mastermind.Widgets
             Draw();
         }
 
+        public void SetText(String text)
+        {
+            this.text = text;
+            Draw();
+        }
+
+        public void SetColor(GT.Color color)
+        {
+            this.textColor = color;
+            Draw();
+        }
+
         public void Draw()
         {
             mDisplay.SimpleGraphics.DisplayText(
