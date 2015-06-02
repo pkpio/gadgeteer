@@ -36,7 +36,7 @@ namespace Mastermind
             btnHandler.Start();
             
             // Setup a controller
-            Controller mController = new Controller(jsHandler, btnHandler, displayTE35);
+            Controller mController = new Controller(jsHandler, btnHandler, ledStrip, displayTE35);
 
             // Start from startscreen
             mController.ChangeScreen(Controller.SCREEN_START);

@@ -145,7 +145,6 @@ namespace Mastermind.Widgets
                         }
                     }
                 }
-                Debug.Print("m " + matched[0] + matched[1] + matched[2] + matched[3] + " d " + done[0] + done[1] + done[2] + done[3]);
             }
             return returnVal;
         }
@@ -167,11 +166,15 @@ namespace Mastermind.Widgets
             if (newValues == null || newValues.Length != 4)
                 throw new ArgumentException("Argument to SetValues MUST be an array of size 4");
 
-            // -TODO- Value Max. and Min. checks
-
             this.values = newValues;
             for (int i = 0; i < values.Length; i++)
+            {
+                if (values[i] < 0 || values[i] >= 6)
+                {
+                    throw new ArgumentException("Argument to SetValues MUST only contain values between 0 and 5");
+                }
                 bubble[i].SetFillColor(MapValueToColor(values[i]));
+            }
         }
 
     }

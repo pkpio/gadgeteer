@@ -17,7 +17,7 @@ namespace Mastermind.Screens
     class GameScreen
     {
         //Screen values
-        private static int NUM_ROUNDS = 12;
+        private static int NUM_ROUNDS = 10;
         private int currentRound = 1;
         private Boolean gameOn = true; // is set to false once the game is over
 
@@ -28,10 +28,11 @@ namespace Mastermind.Screens
         private const int titlePosY = 10;
         private const int codeViewPosX = 20;
         private const int codeViewPosY = 30;
+        private const int keyPosX = 90;
         private const int codeWasPosX = 180;
         private const int codeWasPosY = 100;
 
-        private int codeSpacer = 15;
+        private int codeSpacer = 18;
 
         //Widget strings
         private String guessString = "Please enter a guess. ";
@@ -57,9 +58,6 @@ namespace Mastermind.Screens
             // Init widgets
             screenTitle = new TextView(mController.GetDisplay(), ComposeTitle(), titlePosX, titlePosY);
             mCodeView = new CodeView(codeViewPosX, currentRound * codeSpacer + codeViewPosY, mController.GetDisplay());
-            //DEBUG
-            CodeView sol = new CodeView(codeViewPosX, 11 * codeSpacer + codeViewPosY, mController.GetDisplay());
-            sol.SetValues(mController.GetCode());
 
             // Init joystick
             mController.SetJoystickCallback(JoystickEvent);
@@ -102,12 +100,14 @@ namespace Mastermind.Screens
             if(won)
             {
                 screenTitle.SetText(wonString + roundString1 + currentRound + roundString2);
-                screenTitle.SetColor(GT.Color.FromRGB(0, 204, 0));                
+                screenTitle.SetColor(GT.Color.FromRGB(0, 204, 0));
+                mController.GetLEDStrip().TurnLedOn(0);
             }
             else
             {
                 screenTitle.SetText(lostString + roundString1 + currentRound + roundString2);
                 screenTitle.SetColor(GT.Color.Red);
+                mController.GetLEDStrip().TurnLedOn(6);
             }
             new TextView(mController.GetDisplay(), codeWasString, codeWasPosX, codeWasPosY);
             CodeView sol = new CodeView(codeWasPosX + 10, codeWasPosY + 30, mController.GetDisplay());
@@ -166,19 +166,19 @@ namespace Mastermind.Screens
                 if (gameOn)
                 {
                     int[] compResult = mCodeView.CompareGuess(mController.GetCode());
+                    new KeyView(keyPosX, currentRound * codeSpacer + codeViewPosY, compResult[0], compResult[1], mController.GetDisplay());
                     if (compResult[0] == 4)
                     {
                         EndGame(true);
                     }
                     else
                     {
-                        new RectangleView(codeWasPosX, codeWasPosY + 50, 100, 30, GT.Color.Black, mController.GetDisplay());
-                        new TextView(mController.GetDisplay(), compResult[0] + " " + compResult[1], codeWasPosX, codeWasPosY + 50);
                         IncreaseRound();
                     }                    
                 }
                 else
                 {
+                    mController.GetLEDStrip().TurnAllLedsOff();
                     mController.ChangeScreen(Controller.SCREEN_START);
                 }
             }

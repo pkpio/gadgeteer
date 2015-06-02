@@ -18,15 +18,25 @@ namespace Mastermind
 
         private JoystickHandler mJoystickHandler;
         private ButtonHandler mButtonHandler;
+        private LEDStrip mLEDStrip;
         private DisplayTE35 mDisplay;
 
         public int[] GameCode = new int[4]; // Solution to the game
 
-        public Controller(JoystickHandler jsHandler, ButtonHandler btnHandler, DisplayTE35 display)
+        public Controller(JoystickHandler jsHandler, ButtonHandler btnHandler, LEDStrip ledStrip, DisplayTE35 display)
         {
             this.mJoystickHandler = jsHandler;
             this.mButtonHandler = btnHandler;
+            this.mLEDStrip = ledStrip;
             this.mDisplay = display;
+        }
+
+        /**
+         * Returns the LED strip
+         */
+        public LEDStrip GetLEDStrip()
+        {
+            return this.mLEDStrip;
         }
 
         /**
