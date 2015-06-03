@@ -1,4 +1,5 @@
 using System;
+using System.Threading;
 using Microsoft.SPOT;
 
 using Mastermind.Modules;
@@ -53,6 +54,20 @@ namespace Mastermind
         public int[] GetCode()
         {
             return this.GameCode;
+        }
+
+        /**
+         * Flashes the LED with the given number
+         */
+        public void FlashLEDLoop(int led)
+        {
+            while(true)
+            {
+                mLEDStrip.TurnLedOn(led);
+                Thread.Sleep(200);
+                mLEDStrip.TurnAllLedsOff();
+                Thread.Sleep(200);
+            }            
         }
 
         /**

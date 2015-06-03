@@ -1,4 +1,5 @@
 using System;
+using System.Threading;
 using Microsoft.SPOT;
 
 using Mastermind.Widgets;
@@ -46,7 +47,8 @@ namespace Mastermind.Screens
         private TextView screenTitle;
         Controller mController;
         CodeView mCodeView;
-        
+
+        Thread flashThread;
 
         public GameScreen(Controller mController)
         {
@@ -101,13 +103,15 @@ namespace Mastermind.Screens
             {
                 screenTitle.SetText(wonString + roundString1 + currentRound + roundString2);
                 screenTitle.SetColor(GT.Color.FromRGB(0, 204, 0));
-                mController.GetLEDStrip().TurnLedOn(0);
+                flashThread = new Thread(() => mController.FlashLEDLoop(0));
+                flashThread.Start();
             }
             else
             {
                 screenTitle.SetText(lostString + roundString1 + currentRound + roundString2);
                 screenTitle.SetColor(GT.Color.Red);
-                mController.GetLEDStrip().TurnLedOn(6);
+                flashThread = new Thread(() => mController.FlashLEDLoop(6));
+                flashThread.Start();
             }
             new TextView(mController.GetDisplay(), codeWasString, codeWasPosX, codeWasPosY);
             CodeView sol = new CodeView(codeWasPosX + 10, codeWasPosY + 30, mController.GetDisplay());
@@ -178,7 +182,7 @@ namespace Mastermind.Screens
                 }
                 else
                 {
-                    mController.GetLEDStrip().TurnAllLedsOff();
+                    flashThread.Abort();
                     mController.ChangeScreen(Controller.SCREEN_START);
                 }
             }
