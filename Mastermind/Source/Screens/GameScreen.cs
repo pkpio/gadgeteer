@@ -183,6 +183,7 @@ namespace Mastermind.Screens
                 else
                 {
                     flashThread.Abort();
+                    mController.GetLEDStrip().TurnAllLedsOff();
                     mController.ChangeScreen(Controller.SCREEN_START);
                 }
             }
