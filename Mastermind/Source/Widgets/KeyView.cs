@@ -7,9 +7,15 @@ using Gadgeteer.Modules.GHIElectronics;
 
 namespace Mastermind.Widgets
 {
+    /**
+     * Represents the feedback pins of the game.
+     * Used to inform the player on for how many code bubble he chose
+     * 1. the right color and position and
+     * 2. the right color but not the right position.
+     */ 
     class KeyView
     {
-        private static GT.Color COLOR_0 = GT.Color.Red;
+        private static GT.Color COLOR_0 = GT.Color.Red; 
         private static GT.Color COLOR_1 = GT.Color.White;
         private static GT.Color COLOR_2 = GT.Color.Gray;
 
@@ -27,16 +33,21 @@ namespace Mastermind.Widgets
         
         public KeyView(int posX, int posY, int perfect, int correct, DisplayTE35 display)
         {
+            //set color for each pin
             for (int i=0; i < 4; i++)
             {
-                if(i<perfect)
+                //pins that represent amount of code bubbles with correct color and position
+                if(i<perfect) 
                 {
                     values[i] = COLOR_0;
                 }
+                //pins that represent amount of code bubbles with correct color only
                 else if(i<(perfect+correct))
                 {
-                    values[i] = COLOR_1;
-                } else
+                    values[i] = COLOR_1; 
+                }
+                //the pins not needed are not shown
+                else
                 {
                     values[i] = COLOR_2;
                 }

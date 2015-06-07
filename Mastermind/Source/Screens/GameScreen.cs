@@ -13,7 +13,7 @@ namespace Mastermind.Screens
 {
     /**
      *In this screen the player enters a code to guess the correct one. When he guesses right, he wins the game.
-     *If he doesn't guess the code after the max number of rounds he loses the game.
+     *If he doesn't guess the right code after the max number of rounds, he loses the game.
      */
     class GameScreen
     {
@@ -90,8 +90,8 @@ namespace Mastermind.Screens
         }
 
         /**
-         * Displays if player won or lost the game, and what the correct code was
-         * ends the game
+         * Displays if the player won or lost the game and what the correct code was.
+         * Ends the game.
          */
         private void EndGame(Boolean won)
         {
@@ -120,7 +120,7 @@ namespace Mastermind.Screens
         }
 
         /**
-         * returns a composition of the title, current round number and right punctuation
+         * Returns a composition of the title, current round number and right punctuation.
          */
         private String ComposeTitle()
         {
@@ -128,13 +128,18 @@ namespace Mastermind.Screens
         }
 
         /**
-         * covers the title with a black rectangle, so that a new title can be displayed
+         * Covers the title with a black rectangle, so that a new title can be displayed.
          */
         private void ClearTitle()
         {
             new RectangleView(0, 0, mController.GetDisplay().Width, codeViewPosY, GT.Color.Black, mController.GetDisplay());
         }
 
+        /**
+         * Using the joystick, the user can set the colors for the 4 code bubbles. 
+         * Moving the joystick up or down changes the color of the selected bubble.
+         * Moving the joystick left or right selects the next bubble (to the left/right).
+         */ 
         void JoystickEvent(int action)
         {
 

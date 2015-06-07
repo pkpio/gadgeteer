@@ -33,7 +33,7 @@ namespace Mastermind
         }
 
         /**
-         * Returns the LED strip
+         * Returns the LED strip.
          */
         public LEDStrip GetLEDStrip()
         {
@@ -41,7 +41,7 @@ namespace Mastermind
         }
 
         /**
-         * Returns a handle to display module
+         * Returns a handle to display module.
          */
         public DisplayTE35 GetDisplay()
         {
@@ -49,7 +49,7 @@ namespace Mastermind
         }
 
         /**
-         * Returns the solution code
+         * Returns the solution code.
          */
         public int[] GetCode()
         {
@@ -57,7 +57,7 @@ namespace Mastermind
         }
 
         /**
-         * Flashes the LED with the given number
+         * Flashes the LED with the given number.
          */
         public void FlashLEDLoop(int led)
         {
@@ -71,7 +71,7 @@ namespace Mastermind
         }
 
         /**
-         * Transfer control to a different screen
+         * Transfer control to a different screen.
          */
         public void ChangeScreen(int screenChoice)
         {
@@ -98,7 +98,7 @@ namespace Mastermind
         }
 
         /**
-         * Set a callback for joystick events
+         * Set a callback for joystick events.
          */
         public void SetJoystickCallback(JoystickHandler.JsEventCallback callback)
         {
@@ -106,7 +106,7 @@ namespace Mastermind
         }
 
         /**
-         * Set a callback for Button events
+         * Set a callback for Button events.
          */
         public void SetButtonCallback(ButtonHandler.BtnEventCallback callback)
         {

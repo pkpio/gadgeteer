@@ -10,6 +10,9 @@ using Gadgeteer.Modules.GHIElectronics;
 
 namespace Mastermind.Screens
 {
+    /**
+     * This screen allows the player to select the player mode (1 player or 2 player) at the beginning of the game.
+     */ 
     class StartScreen
     {
         Controller mController;
@@ -53,7 +56,7 @@ namespace Mastermind.Screens
         }
 
         /**
-         * This method will be called when a screen is launced
+         * This method will be called when a screen is launced.
          */
         public void Init()
         {
@@ -70,6 +73,11 @@ namespace Mastermind.Screens
             mController.SetJoystickCallback(JoystickEvent);
         }
 
+        /**
+         * Using the joystick, the user can change the player mode and start the game. 
+         * Moving the joystick up or down selects the player mode (1 player or 2 player). 
+         * Releasing the joystick starts the game with the chosen game mode.
+         */ 
         void JoystickEvent(int action)
         {
             switch (action)
@@ -89,7 +97,7 @@ namespace Mastermind.Screens
                         RefreshSelection();
                     }
                     break;
-
+                
                 case JoystickHandler.JS_RELEASE:
                     if (modeChoice == MODE_ONEPLAY)
                     {
@@ -102,6 +110,10 @@ namespace Mastermind.Screens
             }
         }
 
+        /**
+         * The selected player mode is shown in red, 
+         * the other one in gray.
+         */ 
         void RefreshSelection()
         {
             if (modeChoice == MODE_ONEPLAY)
@@ -120,6 +132,9 @@ namespace Mastermind.Screens
             twoPlayText.Draw();
         }
 
+        /**
+         * Generates a random code and sets it as game code.
+         */ 
         void GenerateCodeForPlayer()
         {
             Random rnd = new Random();

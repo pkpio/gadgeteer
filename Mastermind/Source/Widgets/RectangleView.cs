@@ -7,6 +7,9 @@ using Gadgeteer.Modules.GHIElectronics;
 
 namespace Mastermind.Widgets
 {
+    /**
+     * Allows to draw a rectangle on the screen.
+     */ 
     class RectangleView
     {
         // Widget params

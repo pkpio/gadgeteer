@@ -7,6 +7,9 @@ using Gadgeteer.Modules.GHIElectronics;
 
 namespace Mastermind.Widgets
 {
+    /**
+     * Allows to place a text on the screen.
+     */ 
     class TextView
     {
         private String text;

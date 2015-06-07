@@ -7,6 +7,9 @@ using Gadgeteer.Modules.GHIElectronics;
 
 namespace Mastermind.Widgets
 {
+    /**
+     * Allows to draw an ellipse on the screen.
+     */ 
     class EllipseView
     {
         // Widget params

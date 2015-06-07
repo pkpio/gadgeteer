@@ -7,11 +7,14 @@ using Gadgeteer.Modules.GHIElectronics;
 
 namespace Mastermind.Widgets
 {
+    /**
+     * Represents the 4 bubbles of the code.
+     */ 
     class CodeView
     {
         private static GT.Color COLOR_0 = GT.Color.Blue;
         private static GT.Color COLOR_1 = GT.Color.Magenta;
-        private static GT.Color COLOR_2 = GT.Color.FromRGB(0, 204, 0); //green
+        private static GT.Color COLOR_2 = GT.Color.FromRGB(0, 204, 0); //Green
         private static GT.Color COLOR_3 = GT.Color.Red;
         private static GT.Color COLOR_4 = GT.Color.Yellow;
         private static GT.Color COLOR_5 = GT.Color.Gray;
@@ -23,8 +26,8 @@ namespace Mastermind.Widgets
         private GT.Color outlineSelectColor = GT.Color.White;
         private GT.Color outlineUnselectColor = GT.Color.Black;
         private GT.Color defaultFillColor = COLOR_0;
-        private int selected = 0;
-        private int[] values  = new int[4];
+        private int selected = 0; //the bubble that is currently selected
+        private int[] values  = new int[4]; //colors of the bubbles represented by int values
 
         // Widgets
         EllipseView[] bubble = new EllipseView[4];
@@ -33,11 +36,12 @@ namespace Mastermind.Widgets
         
         public CodeView(int posX, int posY,DisplayTE35 display)
         {
-           
-            this.posX = posX;
+           this.posX = posX;
             this.posY = posY;
             this.mDisplay = display;
-            values = new int[]{0, 0, 0, 0};
+            values = new int[]{0, 0, 0, 0}; // all bubbles have the same color/value at the beginning
+            
+            //draw the 4 bubbles
             bubble[0] = new EllipseView(posX, posY, radius, radius,
                                 defaultFillColor, outlineSelectColor, outlineThickness, mDisplay);
             bubble[1] = new EllipseView(posX + 15, posY, radius, radius,
@@ -48,6 +52,10 @@ namespace Mastermind.Widgets
                                 defaultFillColor, outlineUnselectColor, outlineThickness, mDisplay);
         }
 
+        /**
+         * Selects the bubble which is left from the current one.
+         * If there is no bubble at the left, the bubble at the right end is selected.
+         */
         public  void MoveSelectionLeft()
         {
             bubble[selected].SetOutlineColor(outlineUnselectColor);
@@ -55,6 +63,10 @@ namespace Mastermind.Widgets
             bubble[selected].SetOutlineColor(outlineSelectColor);
         }
 
+        /**
+         * Selects the bubble which is right from the current one.
+         * If there is no bubble at the right, the bubble at the left end is selected.
+         */
         public void MoveSelectionRight()
         {
             bubble[selected].SetOutlineColor(outlineUnselectColor);
@@ -63,7 +75,7 @@ namespace Mastermind.Widgets
         }
 
         /**
-         * Enable or disable the showing of a selector on one of the bubbles
+         * Enable or disable the showing of a selector on one of the bubbles.
          */
         public void ShowSelector(Boolean state)
         {
@@ -73,12 +85,18 @@ namespace Mastermind.Widgets
                 bubble[selected].SetOutlineColor(outlineUnselectColor);
         }
 
+        /**
+         * Moves upwards through the possible colors for the selected bubble.
+         */
         public void IncreaseValue()
         {
             values[selected] = (values[selected] >= 5) ? 0 : values[selected] + 1;
             bubble[selected].SetFillColor(MapValueToColor(values[selected]));
         }
 
+        /**
+        * Moves downwards through the possible colors for the selected bubble.
+        */
         public void DecreaseValue()
         {
             values[selected] = (values[selected] <= 0) ? 5 : values[selected] - 1;
@@ -150,7 +168,7 @@ namespace Mastermind.Widgets
         }
 
         /**
-         * Get the current bubble pattern values
+         * Get the current bubble pattern values.
          */
         public int[] GetValues()
         {
@@ -158,7 +176,7 @@ namespace Mastermind.Widgets
         }
 
         /**
-         * Updates the current bubble values and refresh the colors accordingly
+         * Updates the current bubble values and refresh the colors accordingly.
          */
         public void SetValues(int[] newValues)
         {

@@ -11,7 +11,7 @@ using Gadgeteer.Modules.GHIElectronics;
 namespace Mastermind.Screens
 {
     /**
-     * In 2 player mode, this will be the screen where user picks a code
+     * In 2 player mode, this will be the screen where one of the players picks a code.
      */
     class CodePickScreen
     {
@@ -42,6 +42,11 @@ namespace Mastermind.Screens
             mController.SetButtonCallback(ButtonEvent);
         }
 
+        /**
+         * Using the joystick, the user can set the colors for the 4 code bubbles. 
+         * Moving the joystick up or down changes the color of the selected bubble.
+         * Moving the joystick left or right selects the next bubble (to the left/right).
+         */ 
         void JoystickEvent(int action)
         {
             
@@ -65,11 +70,14 @@ namespace Mastermind.Screens
             }
         }
 
+        /**
+         * Releasing the button starts the game.
+         */ 
         void ButtonEvent(int action)
         {
             if(action == ButtonHandler.BTN_RELEASE)
             {
-                mController.GameCode = this.mCodeView.GetValues();
+                mController.GameCode = this.mCodeView.GetValues(); //entered code is saved
                 mController.ChangeScreen(Controller.SCREEN_GAME_PLAY);
             }
         }
